@@ -79,4 +79,14 @@ async function addEmployee() {
         password: 'Jae0327!',
         database: 'employee_tracker'
     });
+
+    let roleID = roles.indexOf(employee.role);
+    let managerID = managers.indexOf(employee.manager);
+    roleID += 1;
+    managerID += 1;
+    const [rows, fields] = await conn.execute(`INSERT INTO employees (first_name, last_name, role_id, employee_id) VALUES (?,?,?,?)`, [employee.first_name, employee.last_name, roleID, managerID]);
+    await conn.end();
+    console.log("");
+    console.log(`Employee ${employee.first_name} ${employee.last_name} is now added!`);
+    return;
 };
