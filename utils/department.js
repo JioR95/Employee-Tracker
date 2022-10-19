@@ -26,3 +26,17 @@ async function getDepartments() {
     return rows;
 }
 
+async function addDepartment() {
+    let name = await inquirer.prompt(getName);
+    const mysql = require('mysql2/promise');
+    const conn = await mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: 'Jae0327!',
+        database: 'employee_tracker'
+    });
+    const [rows, fields] = await conn.execute(`INSERT INTO departments (name) VALUES (?)`, [name.name]);
+    await conn.end();
+    console.log(`The ${name.name} department was added!`)
+    return;
+}
