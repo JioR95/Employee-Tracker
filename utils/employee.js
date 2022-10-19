@@ -28,3 +28,9 @@ async function getEmployeesArray() {
     }
     return result;
 }
+
+async function addEmployee() {
+    let roles = await getRolesArray();
+    let managers = await getEmployeesArray();
+    let employee = await inquirer.prompt([
+    ])};
