@@ -19,3 +19,12 @@ async function getEmployees() {
     await conn.end();
     return rows;
 }
+
+async function getEmployeesArray() {
+    let employees = await getEmployees();
+    let result = [];
+    for(var i = 0; i<employees.length; i++) {
+        result.push(employees[i]['first name'] + ' ' + employees[i]['last name']);
+    }
+    return result;
+}
