@@ -68,3 +68,14 @@ const mysql = require('mysql2/promise');
     console.log(`The ${role.title} role is now added!`)
     return;
 };
+
+async function getRolesArray() {
+    let roles = await getRoles();
+    var result = [];
+    for(var i = 0; i<roles.length; i++) {
+        result.push(roles[i].title);
+    }
+    return result;
+}
+
+module.exports = {getRoles,addRole,getRolesArray};
