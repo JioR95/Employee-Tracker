@@ -15,3 +15,56 @@ async function getRoles() {
     await conn.end();
     return rows;
 }
+
+async function addRole() {
+    let departments = await getDepartmentsArray();
+    let role = await inquirer.prompt([
+    {
+        type: 'input',
+        name: 'title',
+        message: 'Enter the title of the role?',
+        validate: nameInput => {
+            if (nameInput) {
+                return true;
+            } else {
+                console.log('Enter the title of the role.');
+                return false;
+            }
+        }
+    },
+    {
+        type: 'number',
+        name: 'salary',
+        message: 'Enter a salary for the position: ',
+        validate: salaryInput => {
+            if(salaryInput) {
+                return true;
+            } else {
+                console.log('Enter a salary for the position.');
+                return false;
+            }
+        }
+    },
+    {
+        type: 'list',
+        name: 'department',
+        message: 'Enter a department for this role: ',
+        choices: departments
+    }
+]);
+
+const mysql = require('mysql2/promise');
+    const conn = await mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: 'Jae0327!',
+        database: 'employee_tracker'
+    });
+    let departmentID = departments.indexOf(role.department);
+    departmentID += 1;
+    const [rows, fields] = await conn.execute(`INSERT INTO roles (title, salary, departments_id) VALUES (?,?,?)`, [role.title, role.salary, departmentID]);
+    await conn.end();
+    console.log("");
+    console.log(`The ${role.title} role is now added!`)
+    return;
+};
