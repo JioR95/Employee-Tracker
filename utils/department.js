@@ -13,3 +13,16 @@ const getName = [{
         }
     }
 }];
+async function getDepartments() {
+    const mysql = require('mysql2/promise');
+    const conn = await mysql.createConnection({ 
+        host: 'localhost',
+        user: 'root',
+        password: 'Jae0327!',
+        database: 'employee-tracker'
+    });
+    const [rows, fields] = await conn.execute(`SELECT * FROM departments`);
+    await conn.end();
+    return rows;
+}
+
