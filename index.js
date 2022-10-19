@@ -42,5 +42,43 @@ const addRoleQuestions =[
             }
         }
 
+    },
+];
+
+const promptUser = () => {
+    return inquirer.prompt(mainQuestions);
+}
+
+async function startApp() {
+    let isFinished = false;
+
+    while(!isFinished) {
+        let next = await promptUser();
+        if(next.next === 'View All Departments') {
+            let departments = await getDepartments();
+            console.log(``);
+            await console.table(departments);
+        } else if(next.next === 'Add Department') {
+            await addDepartment();
+        } else if(next.next === 'View All Employees') {
+            let employees = await getEmployees();
+            console.log(``);
+            await console.table(employees);
+        }else if(next.next === 'Add Employee') {
+            await addEmployee();
+        } else if(next.next === 'Update Employee Role') {
+            await updateEmployee();
+        } else if(next.next === 'View All Roles') {
+            let roles = await getRoles();
+            console.log(``);
+            await console.table(roles);
+        } else if(next.next === 'Add Role') {
+            await addRole();
+        } else {
+            isFinished = true;
+        }
+        console.log(``);
     }
-]
+}
+
+startApp();
