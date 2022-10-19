@@ -33,4 +33,50 @@ async function addEmployee() {
     let roles = await getRolesArray();
     let managers = await getEmployeesArray();
     let employee = await inquirer.prompt([
-    ])};
+        {
+            type: 'input',
+            name: 'first_name',
+            message: "Enter employee's first name.",
+            validate: firstNameInput => {
+                if(firstNameInput) {
+                    return true;
+                } else {
+                    console.log("Enter the employee's first name.");
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'input',
+            name: 'last_name',
+            message: "Enter employee's last name.",
+            validate: lastNameInput => {
+                if(lastNameInput) {
+                    return true;
+                } else {
+                    console.log("Enter the employee's last name.");
+                    return false;
+                }
+            }
+        },
+        {
+            type: 'list',
+            name: 'role',
+            message: "Pick a role for the employee: ",
+            choices: roles
+        },
+        {
+            type: 'list',
+            name: 'manager',
+            message: "Pick the manager for this employee: ",
+            choices: managers
+        }
+    ]);
+    const mysql = require('mysql2/promise');
+    const conn = await mysql.createConnection({
+        host: 'localhost',
+        user: 'root',
+        password: 'Jae0327!',
+        database: 'employee_tracker'
+    });
+};
