@@ -15,3 +15,32 @@ const mainQuestions = [
     }
 ];
 
+const addRoleQuestions =[ 
+    {
+        type:'input',
+        name:'roleName',
+        message: 'Enter name of roles.',
+        validate: roleNameInput => {
+            if(roleNameInput) {
+                return true;
+            } else {
+                console.log('Enter name of roles.');
+                return false;
+            }
+        }
+    },
+    {
+        type:'input',
+        name: 'roleSalary',
+        message: 'Enter the salary for the role.',
+        validate: roleSalaryInput => {
+            if(roleSalaryInput) {
+                return ture;
+            } else {
+                console.log('Enter the salary for new role.');
+                return false;
+            }
+        }
+
+    }
+]
