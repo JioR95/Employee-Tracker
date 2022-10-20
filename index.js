@@ -54,13 +54,13 @@ async function startApp() {
 
     while(!isFinished) {
         let next = await promptUser();
-        if(next.next === 'View All Departments') {
+        if(next.next === 'View All Department') {
             let departments = await getDepartments();
             console.log(``);
             await console.table(departments);
         } else if(next.next === 'Add Department') {
             await addDepartment();
-        } else if(next.next === 'View All Employees') {
+        } else if(next.next === 'View All Employee') {
             let employees = await getEmployees();
             console.log(``);
             await console.table(employees);
@@ -68,7 +68,7 @@ async function startApp() {
             await addEmployee();
         } else if(next.next === 'Update Employee Role') {
             await updateEmployee();
-        } else if(next.next === 'View All Roles') {
+        } else if(next.next === 'View All Role') {
             let roles = await getRoles();
             console.log(``);
             await console.table(roles);

@@ -7,7 +7,7 @@ async function getEmployees() {
     const conn = await mysql.createConnection({ 
         host: 'localhost',
         user: 'root',
-        password: 'Jae0327!!',
+        password: 'Jae0327!',
         database: 'employee_tracker'
     });
 
